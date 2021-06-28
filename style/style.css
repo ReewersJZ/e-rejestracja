@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/*body*/
+body {
+    background: rgb(228, 228, 228) !important;
+}
+
+a{
+    color: black;
+}
+
+/*sekcja logowania/rejestracja*/
+
+.w3-container{
+    padding: 0 !important;
+}
+
+.flex_container{
+    display: flex;
+}
+.flex_container a{
+    margin-left: 10px;
+}
+.card.log {
+    width: 50%;
+    margin: 50px auto;
+    border-radius: 4px;
+    box-shadow: 0px 0px 55px rgba(0, 0, 0, .375);
+    border:1px solid rgba(133, 133, 133, 0.733);
+}
+.form_button{
+    text-align: center;
+}
+
+/* nawigacja */
+#navigation_flex{
+    display: flex;
+}
+.logo_brand{
+    width: 50%;
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.navbar-items-to_right{
+    margin-right: 30px;
+}
+
+.nav-link{
+    margin-right: 30px;
+}
+
+.user_name{
+    margin-right: 30px;
+    margin-bottom: 0 !important;
+    padding: 0.5rem;
+}
+
+/* sekcja komunikatów logowania/rejestracji */
+.container_message{
+    text-align: center;
+    color: red;
+    padding-bottom: 20px;
+}
+
+/*btn*/
+.btn {
+    background: rgba(21, 151, 140, 0.993) !important;
+    color: rgb(255, 255, 255) !important;
+    border:1px solid rgba(21, 151, 140, 0.993) !important;
+}
+
+.btn:hover{
+    background-color: goldenrod !important;
+    border:1px solid goldenrod !important;
+}
+
+/*form*/
+.form-control:focus {
+    border-color: rgba(21, 151, 140, 0.993) !important;
+}
+.select_form{
+    text-align: center;
+}
+
+/* dodaj wolne terminy */
+.checkbox_hours{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* moje szczepienia */
+.vaccines_section{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card.mb-4{
+    max-width: 85%;
+    margin: auto;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .375);
+    border-radius: 6px;
+}
+
+/* ustal termin wizyty */
+.select_dates{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* wolne terminy */
+form.terms_list{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+
+/*data*/
+.card-body.m-t2{
+    margin: auto;
+    max-width: 60%;
+    text-align: center;
+
+}
+.mb-3.w-25{
+    display: inline-block;
+    margin:auto;
+    text-align: center;
+}
+
+/* footer */
+.footer_style{
+    text-align: center;
+    margin-top: 40px;
+}
