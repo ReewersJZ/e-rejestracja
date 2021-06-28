@@ -18,6 +18,8 @@ if ((isset($_POST['login']) && $_POST['login'] !== "")
     try{
         $pdo = new PDO("$DBEngine:host=$DBServer;dbname=$DBName;port=$DBPort", $DBUser, $DBPass);
         $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->query('SET NAMES UTF8');
+        $pdo->query('SET CHARACTER SET UTF8');
 
         $user_saved_term = new ClTerms($pdo);
         $clinic_saved_term = new Clinics($pdo);
@@ -29,7 +31,8 @@ if ((isset($_POST['login']) && $_POST['login'] !== "")
                 `users`.`user_surname`,
                 `users`.`user_password`,
                 `users`.`user_id`,
-                `users`.`user_status`
+                `users`.`user_status`,
+                `users`.`user_mail`
 
             FROM `users` 
             WHERE `users`.`user_login`=:login
@@ -42,6 +45,8 @@ if ((isset($_POST['login']) && $_POST['login'] !== "")
 
             $pdo = new PDO("$DBEngine:host=$DBServer;dbname=$DBName;port=$DBPort", $DBUser, $DBPass);
             $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->query('SET NAMES UTF8');
+            $pdo->query('SET CHARACTER SET UTF8');
 
             $stmt = $pdo -> prepare(
                 'SELECT 
@@ -93,6 +98,7 @@ if ((isset($_POST['login']) && $_POST['login'] !== "")
                 if($row['user_password'] == md5($_POST['password'].$TAJNY_KLUCZ)){
                     $_SESSION['username'] = $row['user_name'] . ' ' . $row['user_surname'];
                     $_SESSION['user_id'] = $row['user_id'];
+                    $_SESSION['user_mail'] = $row['user_mail'];
 
                     require_once 'vaccines_user.php';
                 } 

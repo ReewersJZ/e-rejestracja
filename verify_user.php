@@ -15,6 +15,8 @@ if ((isset($_POST['inputLogin_verify']) && $_POST['inputLogin_verify'] !== "")
     try{
         $pdo = new PDO("$DBEngine:host=$DBServer;dbname=$DBName;port=$DBPort", $DBUser, $DBPass);
         $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->query('SET NAMES UTF8');
+        $pdo->query('SET CHARACTER SET UTF8');
 
         $stmt = $pdo -> prepare(
             'SELECT 

@@ -14,6 +14,8 @@ $USER_VACCINES = "";
 
 $pdo = new PDO("$DBEngine:host=$DBServer;dbname=$DBName;port=$DBPort", $DBUser, $DBPass);
 $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->query('SET NAMES UTF8');
+$pdo->query('SET CHARACTER SET UTF8');
 
 $user_saved_term = new ClTerms($pdo);
 $clinic_saved_term = new Clinics($pdo);

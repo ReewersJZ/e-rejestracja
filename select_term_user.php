@@ -14,6 +14,8 @@ $USER_VACCINES = "";
 
 $pdo = new PDO("$DBEngine:host=$DBServer;dbname=$DBName;port=$DBPort", $DBUser, $DBPass);
 $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->query('SET NAMES UTF8');
+$pdo->query('SET CHARACTER SET UTF8');
 
 $update_selected_term = new ClTerms($pdo);
 $check_user_terms = new ClTerms($pdo);
@@ -25,7 +27,7 @@ $select_term_clterms_id = $_POST['clterms_id'];
 $clterms_status = "zajety";
 $clterms_confirmed = "";
 
-if(isset($_SESSION['user_id']) && $_SESSION['user_id'] != "" && isset($_SESSION['username']) && $_SESSION['username'] != ""){
+if(isset($_SESSION['user_id']) && $_SESSION['user_id'] != "" && isset($_SESSION['user_mail']) && $_SESSION['user_mail'] != ""){
 
     $check_user_terms->checkUserTerms($_SESSION['user_id'], $clterms_confirmed, "zajety");
     if($check_user_terms->getError()){
@@ -58,7 +60,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_id'] != "" && isset($_SESSION[
                 $from  = "From: ".$postFrom." \r\n";
                 $from .= 'MIME-Version: 1.0'."\r\n";
                 $from .= 'Content-type: text/html; charset=UTF-8'."\r\n";
-                $adress = $_SESSION['username'];
+                $adress = $_SESSION['user_mail'];
                 $title = "Potwierdzenie rejestracji";
                 $sentMessage = "<html>
                 <head>
