@@ -1,4 +1,5 @@
 
+
 ![Add materials](./gfx/logo_poziom.png)
 # e-Vaccin
 ## Aplikacja e-Vaccin jest narzędziem przeznaczonym do rezerwacji terminów szczepień przeciwko Covid-19. Odbiorcami aplikacji są pacjenci chcący umówić się na wizytę w celu zaszczepienia oraz pracownicy placówek medycznych, którzy zarządzają kalendarzem szczepień w danym podmiocie medycznym.
@@ -63,6 +64,5 @@ Zalogowany pracownik na stronie głównej aplikacji posiada:
 Ponadto zalogowany pracownik może wybrać z menu głównego:
 * opcję "wyszukiwarka", która pozwala na wyszukanie pacjenta po numerze PESEL. Po wyszukaniu żądanego rekordu wyświetla się informacja o pacjencie (z możliwością edycji danych pacjenta), informacja o umówionym terminie wizyty (z możliwością usunięcia rezerwacji) oraz informacja o przyjętch dawkach szczepień.
 * opcję "raporty", która pozwala na wyświetlenie list umówionych na szczepienie pacjentów oraz list pacjentów, którzy zostali zaszczepieni w danej placówce medycznej.
-
 
 
