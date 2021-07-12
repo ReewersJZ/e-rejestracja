@@ -3,7 +3,7 @@
 # e-Vaccin
 ## Aplikacja e-Vaccin jest narzędziem przeznaczonym do rezerwacji terminów szczepień przeciwko Covid-19. Odbiorcami aplikacji są pacjenci chcący umówić się na wizytę w celu zaszczepienia oraz pracownicy placówek medycznych, którzy zarządzają kalendarzem szczepień w danym podmiocie medycznym.
 
-### Aplikacja powstała jako grupowy projekt zaliczeniowy studia podyplomowe, a autorami są: Yulia Morina, Justyna Zahraj oraz Marcin Ciosek
+### Aplikacja powstała jako grupowy projekt zaliczeniowy, a autorami są: Yulia Morina, Justyna Zahraj oraz Marcin Ciosek
 
 ---
 
