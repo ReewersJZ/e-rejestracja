@@ -33,12 +33,16 @@ W celu uruchomienia aplikacji należy:
 
 Aby się zarejestrować należy z widoku głównego aplikacji wybrać opcję "Zarejestruj się", a następnie wypełnić formularz rejestracyjny. Po prawidłowym uzupełnieniu danych użytkownik otrzymuje maila z kodem weryfikacyjnym. Aby ukończyć proces rejestracji należy uzupełnić formularz potwierdzenia rejestracji (http://pc55493.wsbpoz.solidhost.pl/erejestracja/index_verify_reg.php) o login i hasło oraz otrzymany mailem kod weryfikacyjny. 
 
+![Add materials](./gfx/register.png)
+
 
 <a name="loging">
 
 ### LOGOWANIE
 
 Aby zalogować się do aplikacji należy posiadać dane dostępowe nadane przez Administratora (dla kont pracowników przychodni) lub należy się zarejestrować otrzymując na maila dane do logowania. Informacja o zalogowanym użytkowniku znajduje się w prawym głównym rogu, obok przycisku "Wyloguj".
+
+![Add materials](./gfx/login.png)
 
 
 <a name="user_panel">
@@ -51,6 +55,10 @@ Zalogowany pacjent na stronie głównej aplikacji posiada:
 * kartę "wolne terminy" gdzie wyświetlane są dostępne terminy szczepień
 
 Pacjent może usunąć zaplanowany termin wizyty i zarezerwować nowy termin korzystając z wyszukiwarki wolnych terminów. Po wybraniu nowego terminu otrzymuje również potwierdzenie rezerwacji na maila.
+
+![Add materials](./gfx/user_panel.png)
+
+![Add materials](./gfx/user_panel2.png)
 
 
 <a name="employee_panel">
@@ -66,3 +74,8 @@ Ponadto zalogowany pracownik może wybrać z menu głównego:
 * opcję "raporty", która pozwala na wyświetlenie list umówionych na szczepienie pacjentów oraz list pacjentów, którzy zostali zaszczepieni w danej placówce medycznej.
 
 
+![Add materials](./gfx/employee_panel.png)
+
+![Add materials](./gfx/search_engine.png)
+
+![Add materials](./gfx/raports.png)
