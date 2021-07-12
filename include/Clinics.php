@@ -2,7 +2,7 @@
 
 /**
  * @author WSB grupa nr 1
- * Klasa obsługi czynności związanych z tabelą 'users'
+ * Klasa obsługi czynności związanych z tabelą 'clinics'
  */
 
  class Clinics
@@ -62,7 +62,7 @@
     }
 
 
-        /**
+    /**
      * pobieranie Podmiotu medycznego po ID
      * @param int $clterms_clinic_id
     */
@@ -97,7 +97,7 @@
     
    
     /**
-     * pobieranie statusu bledu
+     * pobieranie statusu błędu
     */
     public function getError()
     {
@@ -106,7 +106,7 @@
         return $error;
     }
     /**
-     * pobieranie opisu blędu
+     * pobieranie opisu błędu
     */
     public function getErrorDescription()
     {

@@ -5,30 +5,33 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+:root{
+    --details-color: #E46547;
+    --details-hover-color: #0275d8;
+}
+
+
 /*body*/
 body {
-    background: rgb(228, 228, 228) !important;
+    background: #385C7A !important;
 }
 
 a{
     color: black;
 }
 
-/*sekcja logowania/rejestracja*/
-
-.w3-container{
-    padding: 0 !important;
-}
-
 .flex_container{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
+
 .flex_container a{
     margin-left: 10px;
 }
 .card.log {
     width: 50%;
-    margin: 50px auto;
+    margin: 40px auto;
     border-radius: 4px;
     box-shadow: 0px 0px 55px rgba(0, 0, 0, .375);
     border:1px solid rgba(133, 133, 133, 0.733);
@@ -42,7 +45,8 @@ a{
     display: flex;
 }
 .logo_brand{
-    width: 50%;
+    width: 70%;
+    margin-left: 5%;
 }
 
 .navbar-collapse{
@@ -57,34 +61,53 @@ a{
     margin-right: 30px;
 }
 
+.navbar-toggler{
+    margin: 0 20px 20px auto;
+}
+
+button.btn-nav{
+    background: none;
+    border: none;
+    margin-right: 45px;
+    padding: 0.5rem 0;
+}
+
+button.btn-nav:hover{
+    color: var(--details-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .user_name{
     margin-right: 30px;
     margin-bottom: 0 !important;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
 }
 
-/* sekcja komunikatów logowania/rejestracji */
+/* sekcja komunikatów*/
 .container_message{
     text-align: center;
-    color: red;
+    color: var(--details-color);
+    font-weight: bold;
     padding-bottom: 20px;
 }
 
+
 /*btn*/
 .btn {
-    background: rgba(21, 151, 140, 0.993) !important;
+    background: var(--details-color) !important;
     color: rgb(255, 255, 255) !important;
-    border:1px solid rgba(21, 151, 140, 0.993) !important;
+    border:1px solid var(--details-color) !important;
 }
 
 .btn:hover{
-    background-color: goldenrod !important;
-    border:1px solid goldenrod !important;
+    background-color: var(--details-hover-color) !important;
+    border:1px solid var(--details-hover-color) !important;
 }
 
 /*form*/
 .form-control:focus {
-    border-color: rgba(21, 151, 140, 0.993) !important;
+    border-color: var(--details-hover-color) !important;
 }
 .select_form{
     text-align: center;
@@ -118,15 +141,25 @@ a{
     flex-wrap: wrap;
 }
 
-
 /* wolne terminy */
 form.terms_list{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
+.card_body_item{
+    padding: 0 1rem !important;
+}
 
+.form_button{
+    margin: auto 0;
+}
+
+.form_button button{
+    font-size: 16px;
+}
 
 /*data*/
 .card-body.m-t2{
@@ -141,8 +174,106 @@ form.terms_list{
     text-align: center;
 }
 
+/* wyszukiwarka */
+.search_engine_options{
+    width: 100px;
+    margin: 0;
+}
+
+.form-check{
+    margin: auto 0;
+}
+
+.search_engine_button{
+    margin-left: 20px;
+}
+
+/* raporty */
+.form_raports{
+    justify-content: space-between;
+}
+
+.raports_items{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.raports_options{
+    margin-bottom: 0;
+}
+
 /* footer */
 .footer_style{
     text-align: center;
     margin-top: 40px;
+    color: white;
 }
+
+
+/* Mixiny */
+@media all and (max-width: 991px) {
+    .card.log{
+        width:90%;
+    }
+    .form-label-group{
+        margin-right: 1.5rem;
+    }
+    .w-25{
+        width: 100% !important;
+    }
+}
+
+@media all and (max-width: 1250px) {
+    .card.log{
+        width:70%;
+    }
+    .flex_container{
+        justify-content: center;
+    }
+}
+
+@media all and (max-width: 980px) {
+    .form_raports{
+        justify-content: center;
+    }
+}
+
+@media all and (max-width: 787px) {
+    .search_engine_div{
+        width: 100%;
+        padding: 0;
+    }
+    .search_engine_div input{
+        width: 100%;
+    }
+    .search_engine_button{
+        margin: 10px auto;
+    }
+}
+
+@media all and (max-width: 776px) {
+    form.terms_list{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
+@media all and (max-width: 620px) {
+    .search_engine_div{
+        width: 100%;
+        padding: 0;
+    }
+    .search_engine_div input{
+        width: 100%;
+    }
+    .search_engine_button{
+        margin: 10px auto;
+    }
+}
+
+
+
+

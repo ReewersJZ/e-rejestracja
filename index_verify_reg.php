@@ -1,4 +1,7 @@
 <?php
+
+// Widok strony, która zostaje przesłana jako link w mailu do potwierdzenia rejestracji
+
 require_once 'config/obsluga_sesji.php';
 $AKTYWNY="index.php";
 
@@ -28,9 +31,6 @@ $TRESC=
     </div>
 </div>
 ".PHP_EOL;
-
-
-
 
 
 include_once 'szablony/witryna.php';

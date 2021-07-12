@@ -1,5 +1,7 @@
 <?php
 
+// Logika rejestracji nowego użytkownika - pacjneta. Zapis danych do bazy danych i wysyłka maila z kodem weryfikacyjnym
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/Users.php';
@@ -52,37 +54,54 @@ if ($user_login !== ""){
             include_once 'szablony/witryna.php';
         }
         elseif ($stmt->rowCount()==0){
-            $users->insert($user_login, $user_password, $user_named, $user_surname, $user_mail, $user_phone, $user_pesel, $user_status, $user_code);
-            if($users->getError()){
-                    $TRESC = $users->getErrorDescription();
-                    include_once 'szablony/witryna.php';
-                    exit();
-                }
-            
-            // wysyłka maila z kodem weryfikacyjnym
 
-            $from  = "From: ".$postFrom." \r\n";
-            $from .= 'MIME-Version: 1.0'."\r\n";
-            $from .= 'Content-type: text/html; charset=UTF-8'."\r\n";
-            $adress = $user_login;
-            $title = "Rejestracja użytkownika";
-            $sentMessage = "<html>
-            <head>
-            </head>
-            <body>
-            <h4>Witamy na pokładzie!</h4>
-            <p>Twój kod weryfikacyjny to: <b>".$verifyCode."</b></p>
-            <p> Aby dokończyć rejestrację kliknij w link: <a href='http://pc55493.wsbpoz.solidhost.pl/erejestracja/index_verify_reg.php'>dokończ rejestrację</a> i wprowadź swój kod weryfikacyjny.</p><br>
-            <p>Życzymy przyjemnego użytkowania naszej aplikacji.</p>
-            <p>Yulia, Justyna i Marcin</p>";
-            
-            mail($adress, $title, $sentMessage, $from);
+            $stmt = $pdo -> prepare(
+                'SELECT 
+                    `users`.`user_pesel`
+                FROM `users` 
+                WHERE `users`.`user_pesel`=:pesel
+                ');	
+    
+            $stmt->bindValue(':pesel', $user_pesel);
+            $result = $stmt -> execute(); 
+            if ($stmt->rowCount()>=1) {
+                $KOMUNIKAT= "Użytkownik o takim peselu już istnieje";
+                $TRESC = array();
+                $TRESC[0]="szablony/logowanie.php";
+                include_once 'szablony/witryna.php';
+            }
+            else{
+                $users->insert($user_login, $user_password, $user_named, $user_surname, $user_mail, $user_phone, $user_pesel, $user_status, $user_code);
+                if($users->getError()){
+                        $TRESC = $users->getErrorDescription();
+                        include_once 'szablony/witryna.php';
+                        exit();
+                    }
+                
+                // wysyłka maila z kodem weryfikacyjnym
 
-            // koniec wysyłki maila
+                $from  = "From: ".$postFrom." \r\n";
+                $from .= 'MIME-Version: 1.0'."\r\n";
+                $from .= 'Content-type: text/html; charset=UTF-8'."\r\n";
+                $adress = $user_login;
+                $title = "Rejestracja użytkownika";
+                $sentMessage = "<html>
+                <head>
+                </head>
+                <body>
+                <h4>Witamy na pokładzie!</h4>
+                <p>Twój kod weryfikacyjny to: <b>".$verifyCode."</b></p>
+                <p> Aby dokończyć rejestrację kliknij w link: <a href='http://pc55493.wsbpoz.solidhost.pl/erejestracja/index_verify_reg.php'>dokończ rejestrację</a> i wprowadź swój kod weryfikacyjny.</p><br>
+                <p>Życzymy przyjemnego użytkowania naszej aplikacji.</p>
+                <p>Yulia, Justyna i Marcin</p>";
+                
+                mail($adress, $title, $sentMessage, $from);
 
-            $KOMUNIKAT = "Zarejestrowano użytkownika. Dokończ rejestrację podając kod weryfikacyjny z otrzymanego maila ";
-            include_once 'index_verify_reg.php';
+                // koniec wysyłki maila
 
+                $KOMUNIKAT = "Zarejestrowano użytkownika. Dokończ rejestrację podając kod weryfikacyjny z otrzymanego maila ";
+                include_once 'index_verify_reg.php';
+            }
         }
 
         $stmt->closeCursor();

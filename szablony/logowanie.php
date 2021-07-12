@@ -1,4 +1,7 @@
-    <div class='card log'>
+    
+    <!-- Widok formularza logowania -->
+    
+<div class='card log'>
     <div class='card-body'>
         <form class='form-signin pt-3' action='logowanie.php' method='post'>
             <div class='form-label-group'>

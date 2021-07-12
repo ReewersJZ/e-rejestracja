@@ -1,5 +1,7 @@
 <?php
 
+// Pobieranie informacji o przychodniach (nazwa, adres) do wyszukiwarki wolnych terminów
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/Clinics.php';
@@ -16,8 +18,6 @@ $pdo->query('SET NAMES UTF8');
 $pdo->query('SET CHARACTER SET UTF8');
 
 $clinics = new Clinics($pdo);
-
-
 
     try{
         $stmt = $pdo -> prepare(

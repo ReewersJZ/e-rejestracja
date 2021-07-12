@@ -1,5 +1,7 @@
 <?php
 
+// Inicjacja sesji użytkownika
+
 session_start();
 	
 	if (!isset($_SESSION['inicjuj']))

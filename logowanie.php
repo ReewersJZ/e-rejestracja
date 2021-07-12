@@ -1,4 +1,7 @@
 <?php
+
+// Logika logowania użytkownika
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/ClTerms.php';
@@ -12,7 +15,7 @@ $KOMUNIKAT = "";
 $USER_SAVED_TERM = "";
 $USER_VACCINES = "";
 
-
+// Sprawdzanie czy podano login i hasło
 if ((isset($_POST['login']) && $_POST['login'] !== "")
     && (isset($_POST['password']) && $_POST['password'] !== "")){
     try{
@@ -42,7 +45,7 @@ if ((isset($_POST['login']) && $_POST['login'] !== "")
         $result = $stmt -> execute(); 
         if ($stmt->rowCount()>1) throw new PDOException("Błąd w bazie danych. Więcej niż jeden użytkownik o takim samym loginie");
         if ($stmt->rowCount()==0){
-
+            // Jeśli użytkownik o podanym loginie (pacjent) nie istnieje, to sprawdzanie czy istnieje użytkownik - pracownik o podanym loginie
             $pdo = new PDO("$DBEngine:host=$DBServer;dbname=$DBName;port=$DBPort", $DBUser, $DBPass);
             $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->query('SET NAMES UTF8');
@@ -89,6 +92,7 @@ if ((isset($_POST['login']) && $_POST['login'] !== "")
         }
         else{
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Jeśli użytkownik o podanym loginie istnieje ale jego status jest "nieaktywny" użytkownik musi dokończyć proces rejestracji podając kod weryfikacyjny przesłany mailem
             if($row['user_status'] == "nieaktywny"){
                 $KOMUNIKAT = 'Użytkownik nieaktywny - dokończ proces rejestracji podstępując zgodnie ze wskazówkami w mailu';
                 $TRESC = array();

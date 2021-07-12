@@ -1,5 +1,7 @@
 <?php
 
+// Wyświetlanie w panelu pacjenta informacji o umówionym terminie wizyty oraz o przyjętych dawkach szczepień
+
 $user_vaccines->checkUserTerms($_SESSION['user_id'], "wykonano", "zajety");
 if($user_vaccines->getError()){
     $TRESC = $user_vaccines->getErrorDescription();
@@ -40,25 +42,23 @@ elseif(count($user_saved_term->check_user_terms_array) == 1){
 
     $term = "
     <form class='vaccines_section' action='delete_term_user.php' method='post'>
-    <input class='card-text' name='delete_user_term_id' value='".$check_user_terms_array['clterms_id']."' hidden>
-    <p class='card-text'>Data: ".$check_user_terms_array['clterms_date']."</p>
-    <p class='card-text'>Godzina: ".$check_user_terms_array['clterms_hour_from']."</p>
-    <p class='card-text'>Przychodnia: ".$clinic['clinic_name'].", ".$clinic['clinic_city'].", ".$clinic['clinic_street']."</p>
-    <button type='submit' class='btn btn-primary'>Usuń</button>
+        <input class='card-text' name='delete_user_term_id' value='".$check_user_terms_array['clterms_id']."' hidden>
+        <p class='card-text'>Data: ".$check_user_terms_array['clterms_date']."</p>
+        <p class='card-text'>Godzina: ".$check_user_terms_array['clterms_hour_from']."</p>
+        <p class='card-text'>Przychodnia: ".$clinic['clinic_name'].", ".$clinic['clinic_city'].", ".$clinic['clinic_street']."</p>
+        <button type='submit' class='btn btn-primary'>Usuń</button>
     </form>";
 
     $USER_SAVED_TERM = $term;
     $KOMUNIKAT = '';
     $TRESC = array();
     $TRESC[0] = 'szablony/main_user.php';
-
 }
 else{
     $USER_SAVED_TERM = "Brak umówionej wizyty";
     $KOMUNIKAT = '';
     $TRESC = array();
     $TRESC[0] = 'szablony/main_user.php';
-
 }
 
 ?>

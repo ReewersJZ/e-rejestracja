@@ -1,14 +1,18 @@
 
     <?php 
 
+    // Widok strony głownej pacjenta
+
     if(isset($_SESSION['username'])){
         include "clinics.php";
         $today = date("Y-m-d"); 
     
     ?> 
 
+<!-- Informacje o otrzymanych szczepieniach i ustalonych terminach dla zalogowanego pacjenta -->
+
 <div class="card mb-4">
-    <h5 class="card-header text-center">Moje szczepienia</h5>
+    <h5 class="card-header text-center">MOJE SZCZEPIENIA</h5>
     <div class="card-body">
         <h5 class="card-title">Otrzymane szczepienia</h5>
         <div class="">
@@ -23,7 +27,7 @@
 <hr>
 
 <div class="card mb-4">
-    <h5 class="card-header text-center">Ustal termin wizyty</h5>
+    <h5 class="card-header text-center">USTAL TERMIN WIZYTY</h5>
     <div class="card-body">
         <form class='select_form' action='search_terms.php' method='post'>
             <div class="mb-3">
@@ -40,7 +44,7 @@
                     </div>
                     <div class="mb-3 w-25">
                         <label for="search_terms_dateTo" class="form-label">data do:</label>
-                        <input type="date" class="form-control" id="search_terms_dateTo" name="search_terms_dateTo">
+                        <input type="date" min="<?php echo $today;?>" class="form-control" id="search_terms_dateTo" name="search_terms_dateTo">
                     </div>
                 </div>
                 <div class='checkbox_hours'>
@@ -66,9 +70,11 @@
     </div>
 </div>
 
+<!-- Wyszukiwarka wolnych terminów -->
+
 <div class="container_content">
     <div class="card mb-4">
-      <h5 class="card-header text-center">Wolne terminy</h5>
+      <h5 class="card-header text-center">WOLNE TERMINY</h5>
       <div class="card-body">
         <?php 
         if(isset($FREE_TERMS)){

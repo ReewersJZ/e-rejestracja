@@ -1,5 +1,7 @@
 <?php
 
+// Widok wyszukanych wolnych terminów - widok pacjenta
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/ClTerms.php';
@@ -85,29 +87,29 @@ if(isset($search_terms_dateFrom) && $search_terms_dateFrom != "" && isset($searc
                     foreach ($free_terms_array as $free_term){
 
                         $free_terms_to_choose = $free_terms_to_choose . "
-                            <div class='card-body'>
-                                <form class='terms_list' action='select_term_user.php' method='post'>
-                                    <input type='text' id='clterms_id' name='clterms_id' class='form-control' value='".$free_term['clterms_id']."' hidden>
-                                    
-                                    <div class='form-label-group mt-4'>
-                                        <p>".$free_term['clinic_name']."</p>
-                                    </div>
-                                    <div class='form-label-group mt-4'>
-                                        <p>".$free_term['clterms_date']."</p>
-                                    </div>
-                                    <div class='form-label-group mt-4'>
-                                        <p>".$free_term['clterms_hour_from']."</p>
-                                    </div>
-                                    <div class='form_button'>
-                                        <button class='btn btn-lg btn-primary btn-block mt-4' type='submit'>Wybierz</button>
-                                    </div>
-                                </form>
-                            </div>
-                            ";
-                        }
+                        <div class='card-body card_body_item'>
+                            <form class='terms_list' action='select_term_user.php' method='post'>
+                                <input type='text' id='clterms_id' name='clterms_id' class='form-control' value='".$free_term['clterms_id']."' hidden>
+                                
+                                <div class='form-label-group mt-2'>
+                                    <p>".$free_term['clinic_name']."</p>
+                                </div>
+                                <div class='form-label-group mt-2'>
+                                    <p>".$free_term['clterms_date']."</p>
+                                </div>
+                                <div class='form-label-group mt-2'>
+                                    <p>".$free_term['clterms_hour_from']."</p>
+                                </div>
+                                <div class='form_button'>
+                                    <button class='btn btn-lg btn-primary btn-block' type='submit'>Wybierz</button>
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                        ";
+                    }
                 }
             }
- 
         }
     }
     $free_terms_to_choose_all = $free_terms_to_choose_all . $free_terms_to_choose;

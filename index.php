@@ -1,4 +1,7 @@
 <?php
+
+// Widok strony głównej aplikacji - panel logowania
+
 require_once 'config/obsluga_sesji.php';
 $AKTYWNY = basename(__FILE__);
 
@@ -6,11 +9,6 @@ $AKTYWNY = basename(__FILE__);
 $TRESC=
 
 "
-<p>Dane do logowania na konto personelu przychodni:</p>
-<p>1. Login: ola, hasło: ola</p>
-<p>2. Login: ela, hasło: ela</p>
-<p>3. Login: ula , hasło: ula</p>
-
 <div class='card log'>
     <div class='card-body'>
         <form class='form-signin pt-3' action='logowanie.php' method='post'>
@@ -28,7 +26,8 @@ $TRESC=
         </form>
         <div class='flex_container mt-4'>
             <p>Nie masz jeszcze konta? </p>
-            <a href='register_form.php'>Zarejestruj się</a>
+            <p><a href='register_form.php'>Zarejestruj się</a></p>
+            
         </div>
 
     </div>

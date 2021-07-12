@@ -1,5 +1,7 @@
 <?php
 
+// Dodawanie wolnych terminów z panelu pracownika - pracownik może dodać wolne terminy tylko dla przychodni w której pracuje
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/ClTerms.php';
@@ -8,6 +10,7 @@ $AKTYWNY = basename(__FILE__);
 $TRESC = "";
 $KOMUNIKAT = "";
 
+// Funkcja generująca wolne godziny wizyt (co 15 minut)
 function createArrayOfTime($hour_from, $hour_to){
     $array_hours = [];
     for($k=$hour_from; $k<=$hour_to; $k++){
@@ -40,6 +43,7 @@ $clicked_false = FALSE;
 $clterms_option = "clterms_option";
 
 
+// Sprawdzanie dla jakiego przedziału godzinowego mają być generowane wolne terminy wizyt
 if(isset($clterms_date) && $clterms_date != ""){
     for($i=1; $i<=3; $i++){
         $clterms_option_checked = $clterms_option . $i;
@@ -64,7 +68,7 @@ else{
     include_once 'szablony/witryna.php';
 }
 
-
+// Generowanie i zapisywanie do bazy danych wolnych terminów zgodnie z wyborem godzinowym pracownika
 for($b=0; $b<count($clicked_options); $b++){
     if($clicked_options[$b] == TRUE){
         if($b == 0){

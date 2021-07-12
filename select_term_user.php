@@ -1,5 +1,7 @@
 <?php
 
+// Rezerwacja wybranego terminu wizyty z potwierdzeniem mailowym
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/ClTerms.php';

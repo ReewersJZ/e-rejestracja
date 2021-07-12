@@ -1,4 +1,7 @@
 <?php
+
+// Logika sprawdzania poprawności wpisanego kodu weryfikacyjnego przesłanego mailem
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 
@@ -6,8 +9,6 @@ $AKTYWNY="verify_user.php";
 $TRESC="";
 $LOGIN="";
 $KOMUNIKAT = "";
-
-
 
 
 if ((isset($_POST['inputLogin_verify']) && $_POST['inputLogin_verify'] !== "")
@@ -42,34 +43,34 @@ if ((isset($_POST['inputLogin_verify']) && $_POST['inputLogin_verify'] !== "")
 
                     if ($row['user_code'] == $_POST['inputCode_verify']){
 
-                                if($pdo == null){
-                                    $is_error = TRUE;
-                                    $error_description = 'Brak połączenia z bazą';
-                                    return;
-                                }
-                                try {
-                                    $stmt = $pdo -> prepare('UPDATE users SET
-                                                                        user_status=:user_status,
-                                                                        user_code=:user_code
-                                                                    WHERE user_login=:user_login');
-                                    $stmt->bindValue(':user_code', "", PDO::PARAM_STR);
-                                    $stmt->bindValue(':user_status', "aktywny" , PDO::PARAM_STR);
-                                    $stmt->bindValue(':user_login', $_POST['inputLogin_verify'], PDO::PARAM_STR);
-                                    $result = $stmt -> execute();
-                                    if($result == true){
-                                        $is_error = FALSE;
-                                        $error_description = '';
-                                        $KOMUNIKAT = 'Weryfikacja przebiegła pomyślnie. Zaloguj się.';
-                                        $TRESC = array();
-                                        $TRESC[0] = 'szablony/logowanie.php';
-                                    }
-                                    $stmt->closeCursor();
-                                }
-                                catch(PDOException $e){
-                                    $is_error = TRUE;
-                                    $error_description = 'Nie udało się prawidłowo przeprowadzić weryfikacji użytkownika '. $e->getMessage();
-                                    return;
-                                }
+                        if($pdo == null){
+                            $is_error = TRUE;
+                            $error_description = 'Brak połączenia z bazą';
+                            return;
+                        }
+                        try {
+                            $stmt = $pdo -> prepare('UPDATE users SET
+                                                                user_status=:user_status,
+                                                                user_code=:user_code
+                                                            WHERE user_login=:user_login');
+                            $stmt->bindValue(':user_code', "", PDO::PARAM_STR);
+                            $stmt->bindValue(':user_status', "aktywny" , PDO::PARAM_STR);
+                            $stmt->bindValue(':user_login', $_POST['inputLogin_verify'], PDO::PARAM_STR);
+                            $result = $stmt -> execute();
+                            if($result == true){
+                                $is_error = FALSE;
+                                $error_description = '';
+                                $KOMUNIKAT = 'Weryfikacja przebiegła pomyślnie. Zaloguj się.';
+                                $TRESC = array();
+                                $TRESC[0] = 'szablony/logowanie.php';
+                            }
+                            $stmt->closeCursor();
+                        }
+                        catch(PDOException $e){
+                            $is_error = TRUE;
+                            $error_description = 'Nie udało się prawidłowo przeprowadzić weryfikacji użytkownika '. $e->getMessage();
+                            return;
+                        }
                     }
                     else{
                         $KOMUNIKAT = 'Podano błędny kod weryfikacyjny. Spróbuj jeszcze raz.';

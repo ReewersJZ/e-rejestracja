@@ -1,3 +1,6 @@
+
+<!-- Widok formularza potwierdzenia rejestracji (kod weryfikacyjny) -->
+
 <div class='card log'>
     <div class='card-body'>
         <form class='form-signin pt-3' action='verify_user.php' method='post'>
@@ -16,7 +19,6 @@
             <div class='form_button'>
                 <button class='btn btn-lg btn-primary btn-block mt-4' type='submit'>Prześlij</button>
             </div>
-
         </form>
     </div>
 </div>

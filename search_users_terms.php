@@ -1,5 +1,7 @@
 <?php
 
+// Widok pacjentów, którzy są umówieni na wizytę w bieżącym dniu do przychodni zgodnej z zalogowanym pracownikiem
+
 require_once 'config/obsluga_sesji.php';
 require_once 'config/settings.php';
 require_once 'include/ClTerms.php';
@@ -36,35 +38,35 @@ if(isset($_SESSION['emp_clinic']) && $_SESSION['emp_clinic'] != ""){
             foreach ($booked_terms_array as $booked_term){
 
                 $booked_terms_list = $booked_terms_list . "
-                <div class='card-body'>
-                    <form class='terms_list' action='#' method='post'>
+                <div class='card-body card_body_item'>
+                    <form class='terms_list' action='edit_user_term.php' method='post'>
                         <input type='text' id='clterms_id' name='clterms_id' class='form-control' value='".$booked_term['clterms_id']."' hidden>
                         <input type='text' id='user_id' name='user_id' class='form-control' value='".$booked_term['user_id']."' hidden>
 
-                        <div class='form-label-group mt-4'>
+                        <div class='form-label-group mt-2'>
                             <p>".$booked_term['clterms_date']."</p>
                         </div>
-                        <div class='form-label-group mt-4'>
+                        <div class='form-label-group mt-2'>
                             <p>".$booked_term['clterms_hour_from']."</p>
                         </div>
-                        <div class='form-label-group mt-4'>
+                        <div class='form-label-group mt-2'>
                             <p>".$booked_term['user_name']."</p>
                         </div>
-                        <div class='form-label-group mt-4'>
+                        <div class='form-label-group mt-2'>
                             <p>".$booked_term['user_surname']."</p>
                         </div>
-                        <div class='form-label-group mt-4'>
+                        <div class='form-label-group mt-2'>
                             <p>".$booked_term['user_pesel']."</p>
                         </div>
-                            <div class='form-label-group mt-4'>
+                            <div class='form-label-group mt-2'>
                             <p>".$booked_term['user_mail']."</p>
                         </div>
-                        <div class='form-label-group mt-4'>
+                        <div class='form-label-group mt-2'>
                             <p>".$booked_term['user_phone']."</p>
                         </div>
 
                         <div class='form_button'>
-                            <button class='btn btn-lg btn-primary btn-block mt-4' type='submit'>Edytuj</button>
+                            <button class='btn btn-lg btn-primary btn-block' type='submit'>Potwierdz</button>
                         </div>
                     </form>
                 </div><hr>

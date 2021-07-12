@@ -1,5 +1,7 @@
 <?php
 
+// Formularz rejestracji nowego użytkownika - pacjenta
+
 $TRESC = "
 <div class='card log'>
     <div class='card-body'>
@@ -14,7 +16,7 @@ $TRESC = "
             </div>
             <div class='form-label-group mt-4'>
                 <label for='form_register_mail'>E-mail</label>
-                <input type='mail' id='form_register_mail' name='form_register_mail' class='form-control' placeholder='np. jan.kowalski@o2.pl' required='required' autocomplete='off'>
+                <input type='email' id='form_register_mail' name='form_register_mail' class='form-control' placeholder='np. jan.kowalski@o2.pl' required='required' autocomplete='off'>
             </div>
             <div class='form-label-group mt-4'>
                 <label for='form_register_password'>Hasło</label>
@@ -26,7 +28,7 @@ $TRESC = "
             </div>
             <div class='form-label-group mt-4'>
                 <label for='form_register_pesel'>PESEL</label>
-                <input type='text' maxlength='11' id='form_register_pesel' name='form_register_pesel' class='form-control' required='required'>
+                <input type='text' minlength='11' maxlength='11' id='form_register_pesel' name='form_register_pesel' class='form-control' required='required' autocomplete='off'>
             </div>
 
             <div class='form-check mt-4'>
