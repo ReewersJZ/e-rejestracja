@@ -39,6 +39,8 @@ if(isset($search_terms_dateFrom) && $search_terms_dateFrom != "" && isset($searc
 
     require_once 'vaccines_user.php';
 
+    // Weryfikacja które przedziały godzinowe zostały wybrane
+
     for($i=1; $i<=3; $i++){
         $search_option_checked = $search_terms_option . $i;
         if(isset($_POST[$search_option_checked])){
@@ -59,60 +61,86 @@ if(isset($search_terms_dateFrom) && $search_terms_dateFrom != "" && isset($searc
     $free_terms_to_choose = "";
     $free_terms_to_choose_all = "";
 
+    $final_query = "";
+
+    // Wyszukiwanie wolnych terminów według podanych kryteriów
+
     for($b=0; $b<count($clicked_options); $b++){
         if($clicked_options[$b] == TRUE){
             if($b == 0){
                 $search_terms_hour_from = "08:00:00";
-                $search_terms_hour_to = "11:45:00"; 
+                $search_terms_hour_to = "11:45:00";
+                if($clicked_options[1] == TRUE || $clicked_options[2] == TRUE){
+                    $union = " UNION ";
+                }
+                else{
+                    $union = "";
+                }
             }
             elseif($b == 1){
                 $search_terms_hour_from = "12:00:00";
                 $search_terms_hour_to = "15:45:00"; 
+                if($clicked_options[2] == TRUE){
+                    $union = " UNION ";
+                }
+                else{
+                    $union = "";
+                }
             }
             elseif($b == 2){
                 $search_terms_hour_from = "16:00:00";
                 $search_terms_hour_to = "19:45:00"; 
+                $union = "";
             }
-        
-            $free_terms->getTerms($search_terms_clinic, $search_terms_dateFrom, $search_terms_dateTo, $search_terms_hour_from, $search_terms_hour_to);
 
-            if($free_terms->getError()){
-                    $TRESC = $free_terms->getErrorDescription();
-                    include_once 'szablony/witryna.php';
-                    exit();
-                }
-            else{
-                if(count($free_terms->free_terms_array) > 0){
-                    $free_terms_array = $free_terms->free_terms_array;
-                    foreach ($free_terms_array as $free_term){
+            $query_part = " SELECT `clterms_id`, `clterms_date`, `clterms_hour_from`, `clinic_name` from clinics_terms inner join clinics on clinics_terms.clterms_clinic_id = clinics.clinic_id WHERE clinics_terms.clterms_clinic_id = '".$search_terms_clinic."' and clinics_terms.clterms_status ='wolny' and clinics_terms.clterms_date >='".$search_terms_dateFrom."' and clinics_terms.clterms_date <='".$search_terms_dateTo."' and clinics_terms.clterms_hour_from >='".$search_terms_hour_from."' and clinics_terms.clterms_hour_from <='".$search_terms_hour_to."' ".$union."";
 
-                        $free_terms_to_choose = $free_terms_to_choose . "
-                        <div class='card-body card_body_item'>
-                            <form class='terms_list' action='select_term_user.php' method='post'>
-                                <input type='text' id='clterms_id' name='clterms_id' class='form-control' value='".$free_term['clterms_id']."' hidden>
-                                
-                                <div class='form-label-group mt-2'>
-                                    <p>".$free_term['clinic_name']."</p>
-                                </div>
-                                <div class='form-label-group mt-2'>
-                                    <p>".$free_term['clterms_date']."</p>
-                                </div>
-                                <div class='form-label-group mt-2'>
-                                    <p>".$free_term['clterms_hour_from']."</p>
-                                </div>
-                                <div class='form_button'>
-                                    <button class='btn btn-lg btn-primary btn-block' type='submit'>Wybierz</button>
-                                </div>
-                            </form>
+            $final_query = $final_query . $query_part;
+        }
+    }
+    $final_query = $final_query . " ORDER BY `clterms_date` ASC";
+
+    $free_terms->getTerms($final_query);
+
+    if($free_terms->getError()){
+            $TRESC = $free_terms->getErrorDescription();
+            include_once 'szablony/witryna.php';
+            exit();
+        }
+    else{
+        if(count($free_terms->free_terms_array) > 0){
+            $free_terms_array = $free_terms->free_terms_array;
+
+            foreach ($free_terms_array as $free_term){
+
+                // Wyświetlanie listy wolnych terminów
+
+                $free_terms_to_choose = "
+                <div class='card-body card_body_item'>
+                    <form class='terms_list' action='select_term_user.php' method='post'>
+                        <input type='text' id='clterms_id' name='clterms_id' class='form-control' value='".$free_term['clterms_id']."' hidden>
+                        
+                        <div class='form-label-group mt-2'>
+                            <p>".$free_term['clinic_name']."</p>
                         </div>
-                        <hr>
-                        ";
-                    }
-                }
+                        <div class='form-label-group mt-2'>
+                            <p>".$free_term['clterms_date']."</p>
+                        </div>
+                        <div class='form-label-group mt-2'>
+                            <p>".$free_term['clterms_hour_from']."</p>
+                        </div>
+                        <div class='form_button'>
+                            <button class='btn btn-lg btn-primary btn-block' type='submit'>Wybierz</button>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                ";
+                $free_terms_to_choose_all = $free_terms_to_choose_all . $free_terms_to_choose;
             }
         }
     }
-    $free_terms_to_choose_all = $free_terms_to_choose_all . $free_terms_to_choose;
+
     if($free_terms_to_choose_all == ""){
         $FREE_TERMS = "Brak wyników dla podanych kryteriów wyszukiwania";
         $TRESC= array();

@@ -6,6 +6,8 @@
     if(isset($_SESSION['username'])){
         include "clinics.php";
         $today = date("Y-m-d"); 
+        $tomorrow = new DateTime('tomorrow');
+        $tomorrow = $tomorrow->format('Y-m-d');
     
     ?> 
 
@@ -40,11 +42,11 @@
                 <div class='select_dates mb-3'>
                     <div class="mb-3 w-25">
                         <label for="search_terms_dateFrom" class="form-label">data od:</label>
-                        <input type="date" min="<?php echo $today;?>" class="form-control" id="search_terms_dateFrom" name="search_terms_dateFrom">
+                        <input type="date" min="<?php echo $tomorrow;?>" class="form-control" id="search_terms_dateFrom" name="search_terms_dateFrom">
                     </div>
                     <div class="mb-3 w-25">
                         <label for="search_terms_dateTo" class="form-label">data do:</label>
-                        <input type="date" min="<?php echo $today;?>" class="form-control" id="search_terms_dateTo" name="search_terms_dateTo">
+                        <input type="date" min="<?php echo $tomorrow;?>" class="form-control" id="search_terms_dateTo" name="search_terms_dateTo">
                     </div>
                 </div>
                 <div class='checkbox_hours'>

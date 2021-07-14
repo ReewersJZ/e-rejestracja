@@ -69,7 +69,7 @@
             return;
         }
         try {
-            $query = "SELECT `clterms_id`, `clterms_date`, `clterms_hour_from` from clinics_terms WHERE `clterms_clinic_id` = '$search_terms_clinic' and `clterms_date`='$search_terms_dateFrom' and  `clterms_hour_from`>='$search_terms_hour_from'";
+            $query = "SELECT `clterms_id`, `clterms_date`, `clterms_hour_from` from clinics_terms WHERE `clterms_clinic_id` = '$search_terms_clinic' and `clterms_date`='$search_terms_dateFrom' and  `clterms_hour_from`='$search_terms_hour_from'";
 
             $stmt = $this->pdo -> prepare($query);
             $result = $stmt -> execute();
@@ -90,10 +90,9 @@
 
   /**
      * pobieranie wolnych terminów
-     * @param string $order_by default clterms_date - kolumna względem której ma być sortowana
-     * @param bool $narastajaco default true - czy sortowac narastająco
+     * @param string $final_query - końcowe, złożone zapytanie dotczące wolnych terminów według wybranych kryteriów wyszukiwania
     */
-    public function getTerms($search_terms_clinic, $search_terms_dateFrom, $search_terms_dateTo, $search_terms_hour_from, $search_terms_hour_to, $order_by='clterms_date', $narastajaco = TRUE)
+    public function getTerms($final_query)
     {
         $this->free_terms_array = array();
         if($this->pdo == null){
@@ -102,13 +101,7 @@
             return;
         }
         try {
-            $query = "SELECT `clterms_id`, `clterms_date`, `clterms_hour_from`, `clinic_name` from clinics_terms inner join clinics on clinics_terms.clterms_clinic_id = clinics.clinic_id WHERE clinics_terms.clterms_clinic_id = '$search_terms_clinic' and clinics_terms.clterms_status ='wolny' and clinics_terms.clterms_date >='$search_terms_dateFrom' and clinics_terms.clterms_date <='$search_terms_dateTo' and clinics_terms.clterms_hour_from >='$search_terms_hour_from' and clinics_terms.clterms_hour_from <='$search_terms_hour_to'"; 
-
-            $query .= 'ORDER BY '.$order_by;
-            if($narastajaco)
-                $query .= ' ASC ';
-            else
-                $query .= ' DESC ';
+            $query = $final_query; 
 
             $stmt = $this->pdo -> prepare($query);
             $result = $stmt -> execute();

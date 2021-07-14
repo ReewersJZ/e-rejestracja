@@ -71,6 +71,21 @@ if ($user_login !== ""){
                 include_once 'szablony/witryna.php';
             }
             else{
+
+                if(!intval($user_pesel)){
+                    $KOMUNIKAT= "Niepoprawny pesel";
+                    $TRESC = array();
+                    $TRESC[0]="szablony/logowanie.php";
+                    include_once 'szablony/witryna.php';
+                }
+
+                if(!intval($user_phone)){
+                    $KOMUNIKAT= "Niepoprawny numer telefonu";
+                    $TRESC = array();
+                    $TRESC[0]="szablony/logowanie.php";
+                    include_once 'szablony/witryna.php';
+                }
+
                 $users->insert($user_login, $user_password, $user_named, $user_surname, $user_mail, $user_phone, $user_pesel, $user_status, $user_code);
                 if($users->getError()){
                         $TRESC = $users->getErrorDescription();

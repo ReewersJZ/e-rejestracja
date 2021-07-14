@@ -20,9 +20,6 @@
 <nav class='navbar sticky-top navbar-expand-lg navbar-light bg-light mb-5'>
   <a class='navbar-brand' href='#'><img class='logo_brand' src='gfx/logo_poziom.png' alt='logo'></a>
     <div id='navigation_flex' class='container-fluid'>
-      <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
-        <span class='navbar-toggler-icon'></span>
-      </button>
       <?php if(isset($_SESSION['username'])){include "szablony/menu_user.php";} elseif(isset($_SESSION['empname'])){include "szablony/menu_employee.php";} ;?>
     </div>
 </nav>

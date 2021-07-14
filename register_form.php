@@ -30,14 +30,6 @@ $TRESC = "
                 <label for='form_register_pesel'>PESEL</label>
                 <input type='text' minlength='11' maxlength='11' id='form_register_pesel' name='form_register_pesel' class='form-control' required='required' autocomplete='off'>
             </div>
-
-            <div class='form-check mt-4'>
-                <input type='checkbox' class='form-check-input' id='agreement_rodo'>
-                <small>
-                    <label class='form-check-label' for='agreement_rodo'>Zgoda na przetwarzanie danych osobowych według RODO.</label>
-                </small>
-            </div>
-
             <div class='form_button mt-4 pb-3'>
                 <button class='btn btn-lg btn-primary btn-block' type='submit'>Zarejestruj się</button>
             </div>
